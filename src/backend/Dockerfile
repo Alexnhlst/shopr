@@ -1,7 +1,10 @@
 FROM php:8.1-fpm-alpine
 
+# Import extension installer
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+
 # Install extensions
-RUN apk update && apk add unzip && docker-php-ext-install pdo_mysql bcmath
+RUN apk update && apk add unzip && docker-php-ext-install pdo_mysql bcmath opcache redis
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -10,14 +13,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 COPY .docker/php.ini $PHP_INI_DIR/conf.d/opcache.ini
 
 # Use the default development configuration
-RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
+RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.in
 
-# Install Bash
-RUN apk --no-cache add bash
+# Install extra packages
+RUN apk --no-cache add bash mysql-client mariadb-connector-c-dev
 
 # Create user based on provided user ID
 ARG HOST_UID
-RUN adduser --disabled-password --gecos "" --uid $HOST_UID demo
+RUN adduser --disabled-password --gecos "" --uid $HOST_UID shopr
 
 # Switch to that user
-USER demo
+USER shopr
+

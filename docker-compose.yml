@@ -37,6 +37,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      redis:
+        condition: service_started
 
   # Frontend Service
   frontend:
@@ -85,9 +87,18 @@ services:
     depends_on:
       - nginx
 
+  # Redis Service
+  redis:
+    image: redis:6-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+
 # Volumes
 volumes:
 
   mysqldata:
 
   phpmyadmindata:
+
+  redisdata:
