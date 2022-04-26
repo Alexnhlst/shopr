@@ -1,21 +1,27 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div id="app">
+    <HelloThere :msg="msg" />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<script>
+import axios from "axios";
+import HelloThere from "./components/HelloThere.vue";
+
+export default {
+  name: "App",
+  components: {
+    HelloThere,
+  },
+  data() {
+    return {
+      msg: null,
+    };
+  },
+  mounted() {
+    axios
+      .get("http://backend.shopr.test/api/hello-there")
+      .then((response) => (this.msg = response.data));
+  },
+};
+</script>
