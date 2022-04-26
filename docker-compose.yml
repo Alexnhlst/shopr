@@ -9,6 +9,10 @@ services:
     ports:
       - 80:80
       - 443:443
+    networks:
+      default:
+        aliases:
+          - frontend.shopr.test
     volumes:
       - ./src/backend:/var/www/backend
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
@@ -28,6 +32,8 @@ services:
     working_dir: /var/www/backend
     volumes:
       - ./src/backend:/var/www/backend
+      - ./.docker/backend/init:/opt/files/init
+      - ./.docker/nginx/certs:/usr/local/share/ca-certificates
     depends_on:
       mysql:
         condition: service_healthy

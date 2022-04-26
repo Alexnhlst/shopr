@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Install Composer dependencies
+composer install -d "/var/www/backend"
+
+# Deal with the .env file if necessary
+if [ ! -f "/var/www/backend/.env" ]; then
+    # Create .env file
+    cat > "/var/www/backend/.env" << EOF
+APP_NAME=shopr
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://backend.shopr.test
+
+LOG_CHANNEL=single
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=shopr
+DB_USERNAME=root
+DB_PASSWORD=root
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+EOF
+
+    # Generate application key
+    php "/var/www/backend/artisan" key:generate --ansi
+fi
+
+# Database
+php "/var/www/backend/artisan" migrate
