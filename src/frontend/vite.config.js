@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     hmr: {
-      clientPort: 80,
+      clientPort: 443,
     },
     port: 8080,
     watch: {

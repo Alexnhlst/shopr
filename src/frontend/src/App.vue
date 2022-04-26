@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://backend.shopr.test/api/hello-there")
+      .get('https://backend.shopr.test/api/hello-there')
       .then((response) => (this.msg = response.data));
   },
 };
