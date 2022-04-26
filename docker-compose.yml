@@ -73,6 +73,18 @@ services:
       mysql:
         condition: service_healthy
 
+  # Ngrok Service
+  ngrok:
+    image: wernight/ngrok:latest
+    ports:
+      - 4040:4040
+    environment:
+      NGROK_PROTOCOL: http
+      NGROK_PORT: nginx:443
+      NGROK_AUTH: ${NGROK_AUTH}
+    depends_on:
+      - nginx
+
 # Volumes
 volumes:
 
