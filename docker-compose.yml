@@ -5,14 +5,16 @@ services:
 
   # Nginx Service
   nginx:
-    image: nginx:1.21
+    image: nginx:1.21-alpine
     ports:
       - 80:80
     volumes:
       - ./src:/var/www/php
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+      - phpmyadmindata:/var/www/phpmyadmin
     depends_on:
       - php
+      - phpmyadmin
 
   # PHP Service
   php:
@@ -41,11 +43,11 @@ services:
 
   # PhpMyAdmin Service
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5
-    ports:
-      - 8080:80
+    image: phpmyadmin/phpmyadmin:5-fpm-alpine
     environment:
       PMA_HOST: mysql
+    volumes:
+      - phpmyadmindata:/var/www/html
     depends_on:
       mysql:
         condition: service_healthy
@@ -54,3 +56,5 @@ services:
 volumes:
 
   mysqldata:
+
+  phpmyadmindata:
