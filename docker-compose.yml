@@ -108,6 +108,15 @@ services:
     depends_on:
       - backend
 
+  # Scheduler Service
+  scheduler:
+    image: mcuadros/ofelia:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.docker/scheduler/config.ini:/etc/ofelia/config.ini
+    depends_on:
+      - backend
+
 # Volumes
 volumes:
 
