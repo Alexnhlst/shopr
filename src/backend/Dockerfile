@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.1-fpm-alpine as backend
 
 # Import extension installer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
@@ -24,3 +24,8 @@ RUN adduser --disabled-password --gecos "" --uid $HOST_UID shopr
 
 # Switch to that user
 USER shopr
+
+FROM backend as worker
+
+# Start worker
+CMD ["php", "/var/www/backend/artisan", "queue:work"]

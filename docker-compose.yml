@@ -27,6 +27,7 @@ services:
   backend:
     build:
       context: ./src/backend
+      target: backend
       args:
         HOST_UID: $HOST_UID
     working_dir: /var/www/backend
@@ -93,6 +94,19 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redisdata:/data
+
+  # Worker Service
+  worker:
+    build:
+      context: ./src/backend
+      target: worker
+      args:
+        HOST_UID: $HOST_UID
+    working_dir: /var/www/backend
+    volumes:
+      - ./src/backend:/var/www/backend
+    depends_on:
+      - backend
 
 # Volumes
 volumes:
