@@ -4,7 +4,7 @@ FROM php:8.1-fpm-alpine
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
 # Install extensions
-RUN apk update && apk add unzip && docker-php-ext-install pdo_mysql bcmath opcache redis
+RUN apk update && apk add unzip && install-php-extensions pdo_mysql bcmath opcache redis
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -24,4 +24,3 @@ RUN adduser --disabled-password --gecos "" --uid $HOST_UID shopr
 
 # Switch to that user
 USER shopr
-
