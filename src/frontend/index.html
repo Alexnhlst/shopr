@@ -2,12 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Shopr</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/assets/css/reset.css" />
+    <link rel="stylesheet" href="./src/assets/css/style.css" />
+    <!-- Fontawesome -->
+    <script defer src="./src/assets/js/fontawesome/all.js"></script>
+    <!-- JQuery -->
+    <script defer src="./src/assets/js/jquery/jquery-3.6.0.min.js"></script>
+    <!-- Mapbox -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+  <body id="body">
+    <!-- ANCHOR Navbar -->
+    <nav id="main-nav"></nav>
+    <!-- ANCHOR Main content -->
+    <main>
+      <div id="main-content">
+        <!-- ANCHOR Herobox -->
+        <section id="herobox">
+          <!-- ANCHOR Main hero -->
+          <div id="main-hero"></div>
+          <!-- ANCHOR Offer hero -->
+          <div id="offer-hero"></div>
+        </section>
+        <!-- ANCHOR Secondary content -->
+        <section id="secondary-content">
+          <!-- ANCHOR Categories -->
+          <div class="sections" id="selector"></div>
+          <!-- ANCHOR Map -->
+          <div class="map-section"></div>
+        </section>
+        <!-- ANCHOR User reviews -->
+        <section id="review"></section>
+        <!-- ANCHOR Info boxes -->
+        <section id="info-boxes"></section>
+        <!-- ANCHOR Footer -->
+        <footer id="main-footer"></footer>
+      </div>
+      <!-- ANCHOR JS -->
+      <script type="module" src="./src/assets/js/createElements.js"></script>
+      <!-- <script type="module" src="./assets/js/mediaQueries.js"></script> -->
+    </main>
   </body>
 </html>
