@@ -58,7 +58,10 @@ let createInputSection = (data) => {
     userInputs.classList.add("user-details-section");
     areaGrid.forEach((element) => {
       userInputs.innerHTML += `
-        <div class=${element}></div>
+        <div class=${element}>
+          <input
+            type="text"/>
+        </div>
       `;
       console.log(element);
     });

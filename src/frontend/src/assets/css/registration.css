@@ -44,3 +44,13 @@ input[type="email"] {
 ::placeholder {
   color: #7569bf;
 }
+
+.user-details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  grid-template-areas:
+    "c1 c2"
+    "c3 c4"
+    "c7 c8";
+}
